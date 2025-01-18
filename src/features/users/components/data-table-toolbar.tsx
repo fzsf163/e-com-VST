@@ -1,7 +1,9 @@
-import { Cross2Icon } from '@radix-ui/react-icons'
-import { Table } from '@tanstack/react-table'
+import { handleDeleteRows } from '@/components/layout/data/shared/handleRowDelete'
+import { DeleteRowsDialog } from '@/components/layout/data/shared/table-delete-button'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Cross2Icon } from '@radix-ui/react-icons'
+import { Table } from '@tanstack/react-table'
 import { userTypes } from '../data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
@@ -14,7 +16,9 @@ export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
-
+  const handleDelete = () => {
+    handleDeleteRows(table)
+  }
   return (
     <div className='flex items-center justify-between'>
       <div className='flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2'>
@@ -60,6 +64,11 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
+      {/* Delete button */}
+      <DeleteRowsDialog
+        table={table}
+        handleDelete={handleDelete}
+      ></DeleteRowsDialog>
       <DataTableViewOptions table={table} />
     </div>
   )
