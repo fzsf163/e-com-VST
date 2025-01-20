@@ -3,7 +3,7 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
 
 export const Route = createLazyFileRoute('/_authenticated/products/')({
   component: RouteComponent,
@@ -20,7 +20,18 @@ function RouteComponent() {
           <ProfileDropdown />
         </div>
       </Header>
-      <Main fixed>hello products</Main>
+      <Main fixed>
+        YOUR PRODCUTS
+        <div>
+          <div>
+            <Link to='/products/$section' params={{ section: 'Products' }}>
+              Products
+            </Link>
+            <Link to='/drafts'>Drafts</Link>
+            <Link to='/acheckouts'>Abandoned Checkouts</Link>
+          </div>
+        </div>
+      </Main>
     </>
   )
 }
