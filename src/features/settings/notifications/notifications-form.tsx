@@ -1,8 +1,3 @@
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@tanstack/react-router'
-import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -16,6 +11,11 @@ import {
 } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
+import { toast } from '@/hooks/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link } from '@tanstack/react-router'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 const notificationsFormSchema = z.object({
   type: z.enum(['all', 'mentions', 'none'], {
@@ -207,7 +207,7 @@ export function NotificationsForm() {
                 <FormDescription>
                   You can manage your mobile notifications in the{' '}
                   <Link
-                    to='/settings'
+                    to='/user/settings'
                     className='underline decoration-dashed underline-offset-4 hover:decoration-solid'
                   >
                     mobile settings
