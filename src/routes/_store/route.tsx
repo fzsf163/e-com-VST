@@ -12,12 +12,12 @@ export const Route = createFileRoute('/_store')({
 function RouteComponent() {
   return (
     <div className='w-full'>
-      <div className='flex items-center justify-evenly p-2 lg:hidden w-full  bg-slate-900 text-primary-foreground dark:text-foreground dark:bg-secondary sticky top-0'>
+      <div className='flex items-center justify-evenly p-2 lg:hidden w-full  bg-slate-900 text-primary-foreground dark:text-foreground dark:bg-secondary sticky top-0 z-50'>
         <SheetSide></SheetSide>
         <SearchWithModal></SearchWithModal>
         <ThemeSwitch />
       </div>
-      <div className='hidden lg:block sticky top-0'>
+      <div className='hidden lg:block sticky top-0 z-50'>
         <StoreTopNavbar></StoreTopNavbar>
         <NavbarItems></NavbarItems>
       </div>
