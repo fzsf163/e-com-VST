@@ -1,5 +1,5 @@
-import { ProfileDropdown } from '@/components/profile-dropdown'
-import { ThemeSwitch } from '@/components/theme-switch'
+import { StoreTopNavbar } from '@/components/store/shared/navbar'
+import NavbarItems from '@/components/store/shared/secondNav'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_store')({
@@ -9,10 +9,9 @@ export const Route = createFileRoute('/_store')({
 function RouteComponent() {
   return (
     <div>
-      <div className='ml-auto flex items-center space-x-4 w-full dark:bg-secondary bg-gray-500 text-primary-foreground dark:text-foreground'>
-        <ThemeSwitch />
-        <ProfileDropdown />
-      </div>
+      <StoreTopNavbar></StoreTopNavbar>
+      <NavbarItems></NavbarItems>
+      {/* <CategoryList /> */}
       <Outlet />
     </div>
   )
