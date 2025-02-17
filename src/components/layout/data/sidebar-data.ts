@@ -51,7 +51,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Dashboard',
-          url: '/',
+          url: '/user',
           icon: IconLayoutDashboard,
         },
         {
@@ -60,26 +60,26 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'Orders',
-              url: '/orders',
+              url: '/user/orders',
             },
             {
               title: 'Drafts',
-              url: '/drafts',
+              url: '/user/drafts',
             },
             {
               title: 'Abandoned Checkouts',
-              url: '/acheckouts',
+              url: '/user/acheckouts',
             },
           ],
         },
         {
           title: 'Apps',
-          url: '/apps',
+          url: '/user/apps',
           icon: IconPackages,
         },
         {
           title: 'Chats',
-          url: '/chats',
+          url: '/user/chats',
           badge: '3',
           icon: IconMessages,
         },
@@ -89,25 +89,25 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'Products',
-              url: '/products',
+              url: '/user/products',
             },
             {
               title: 'Collections',
-              url: '/products/$section',
+              url: '/user/products/$section',
             },
             {
               title: 'Inventory',
-              url: '/products/$section',
+              url: '/user/products/$section',
             },
             {
               title: 'GiftCards',
-              url: '/products/$section',
+              url: '/user/products/$section',
             },
           ],
         },
         {
           title: 'Users',
-          url: '/users',
+          url: '/user/users',
           icon: IconUsers,
         },
       ],
@@ -183,34 +183,34 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'Profile',
-              url: '/settings',
+              url: '/user/settings',
               icon: IconUserCog,
             },
             {
               title: 'Account',
-              url: '/settings/account',
+              url: '/user/settings/account',
               icon: IconTool,
             },
             {
               title: 'Appearance',
-              url: '/settings/appearance',
+              url: '/user/settings/appearance',
               icon: IconPalette,
             },
             {
               title: 'Notifications',
-              url: '/settings/notifications',
+              url: '/user/settings/notifications',
               icon: IconNotification,
             },
             {
               title: 'Display',
-              url: '/settings/display',
+              url: '/user/settings/display',
               icon: IconBrowserCheck,
             },
           ],
         },
         {
           title: 'Help Center',
-          url: '/help-center',
+          url: '/user/help-center',
           icon: IconHelp,
         },
       ],

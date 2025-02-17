@@ -5,7 +5,7 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
-export const Route = createLazyFileRoute('/_authenticated/products/')({
+export const Route = createLazyFileRoute('/user/_authenticated/products/')({
   component: RouteComponent,
 })
 
@@ -15,7 +15,7 @@ function RouteComponent() {
       {/* ===== Top Heading ===== */}
       <Header>
         <Search />
-        <div className='ml-auto flex items-center space-x-4'>
+        <div className="ml-auto flex items-center space-x-4">
           <ThemeSwitch />
           <ProfileDropdown />
         </div>

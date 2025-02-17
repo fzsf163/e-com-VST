@@ -1,7 +1,9 @@
 import Orders from '@/features/orders'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
-export const Route = createLazyFileRoute('/_authenticated/products/$section/')({
+export const Route = createLazyFileRoute(
+  '/user/_authenticated/products/$section/',
+)({
   component: RouteComponent,
 })
 
