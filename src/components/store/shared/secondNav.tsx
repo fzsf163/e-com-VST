@@ -59,8 +59,8 @@ const CategoryItem = ({
 const NavbarItems = () => {
   return (
     <nav className='bg-background text-foreground dark:text-white shadow dark:shadow-foreground/20 py-4 px-6'>
-      <div className='flex items-center gap-4 max-w-7xl mx-auto'>
-        <div className='flex gap-2'>
+      <div className='flex items-center justify-center gap-4 max-w-7xl mx-auto'>
+        <div className='flex items-center flex-wrap xl:flex-nowrap gap-2'>
           {categories.map((category) => (
             <CategoryItem key={category.name} category={category} level={0} />
           ))}

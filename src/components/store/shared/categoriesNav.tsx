@@ -15,19 +15,19 @@ const CategoryComponent = ({
 
   return (
     <div>
-      <div>
+      <div className='p-2'>
         {hasChildren && (
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? '−' : '+'}
           </button>
         )}
-        <span style={{ fontWeight: level === 0 ? 'bold' : 'normal' }}>
+        <span className='space-x-3' style={{ fontWeight: level === 0 ? 'bold' : 'normal' }}>
           {category.name}
         </span>
       </div>
 
       {isOpen && hasChildren && (
-        <div>
+        <div className='pl-3'>
           {category.children?.map((child) => (
             <CategoryComponent
               key={child.name}
@@ -43,8 +43,7 @@ const CategoryComponent = ({
 
 const CategoryList = () => {
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Product Categories</h1>
+    <div>
       {categories.map((category) => (
         <CategoryComponent key={category.name} category={category} level={0} />
       ))}

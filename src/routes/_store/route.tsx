@@ -1,5 +1,8 @@
+import { SheetSide } from '@/components/store/shared/mobileNav'
+import SearchWithModal from '@/components/store/shared/mobileSearch'
 import { StoreTopNavbar } from '@/components/store/shared/navbar'
 import NavbarItems from '@/components/store/shared/secondNav'
+import { ThemeSwitch } from '@/components/theme-switch'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_store')({
@@ -8,9 +11,16 @@ export const Route = createFileRoute('/_store')({
 
 function RouteComponent() {
   return (
-    <div>
-      <StoreTopNavbar></StoreTopNavbar>
-      <NavbarItems></NavbarItems>
+    <div className='w-full'>
+      <div className='flex items-center justify-evenly p-2 lg:hidden w-full  bg-slate-900 text-primary-foreground dark:text-foreground dark:bg-secondary'>
+        <SheetSide></SheetSide>
+        <SearchWithModal></SearchWithModal>
+        <ThemeSwitch />
+      </div>
+      <div className='hidden lg:block'>
+        <StoreTopNavbar></StoreTopNavbar>
+        <NavbarItems></NavbarItems>
+      </div>
       {/* <CategoryList /> */}
       <Outlet />
     </div>

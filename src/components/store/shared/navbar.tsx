@@ -4,8 +4,8 @@ import SearchWithIcon from './searchWithIcon'
 
 export function StoreTopNavbar() {
   return (
-    <div className='w-full bg-slate-900 text-primary-foreground dark:text-foreground dark:bg-secondary'>
-      <div className='flex items-center justify-evenly gap-3  w-[70%] mx-auto py-5 '>
+    <div className='w-full  bg-slate-900 text-primary-foreground dark:text-foreground dark:bg-secondary'>
+      <div className='flex items-center justify-center gap-10 py-5 '>
         <p>LOGO</p>
         <SearchWithIcon></SearchWithIcon>
         <NavMap />
