@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UserRouteImport } from './routes/user/route'
 import { Route as StoreRouteImport } from './routes/_store/route'
 import { Route as StoreIndexImport } from './routes/_store/index'
 import { Route as StoreAboutImport } from './routes/_store/about'
@@ -24,7 +25,6 @@ import { Route as UserAuthenticatedIndexImport } from './routes/user/_authentica
 
 // Create Virtual Routes
 
-const UserImport = createFileRoute('/user')()
 const errors503LazyImport = createFileRoute('/(errors)/503')()
 const errors500LazyImport = createFileRoute('/(errors)/500')()
 const errors404LazyImport = createFileRoute('/(errors)/404')()
@@ -83,7 +83,7 @@ const UserAuthenticatedProductsSectionIndexLazyImport = createFileRoute(
 
 // Create/Update Routes
 
-const UserRoute = UserImport.update({
+const UserRouteRoute = UserRouteImport.update({
   id: '/user',
   path: '/user',
   getParentRoute: () => rootRoute,
@@ -191,8 +191,8 @@ const auth500Route = auth500Import.update({
 } as any)
 
 const UserAuthenticatedRouteRoute = UserAuthenticatedRouteImport.update({
-  id: '/user/_authenticated',
-  getParentRoute: () => UserRoute,
+  id: '/_authenticated',
+  getParentRoute: () => UserRouteRoute,
 } as any)
 
 const UserAuthenticatedIndexRoute = UserAuthenticatedIndexImport.update({
@@ -379,15 +379,15 @@ declare module '@tanstack/react-router' {
       id: '/user'
       path: '/user'
       fullPath: '/user'
-      preLoaderRoute: typeof UserImport
+      preLoaderRoute: typeof UserRouteImport
       parentRoute: typeof rootRoute
     }
     '/user/_authenticated': {
       id: '/user/_authenticated'
-      path: '/user'
+      path: ''
       fullPath: '/user'
       preLoaderRoute: typeof UserAuthenticatedRouteImport
-      parentRoute: typeof UserRoute
+      parentRoute: typeof UserRouteImport
     }
     '/(auth)/500': {
       id: '/(auth)/500'
@@ -679,15 +679,17 @@ const UserAuthenticatedRouteRouteWithChildren =
     UserAuthenticatedRouteRouteChildren,
   )
 
-interface UserRouteChildren {
+interface UserRouteRouteChildren {
   UserAuthenticatedRouteRoute: typeof UserAuthenticatedRouteRouteWithChildren
 }
 
-const UserRouteChildren: UserRouteChildren = {
+const UserRouteRouteChildren: UserRouteRouteChildren = {
   UserAuthenticatedRouteRoute: UserAuthenticatedRouteRouteWithChildren,
 }
 
-const UserRouteWithChildren = UserRoute._addFileChildren(UserRouteChildren)
+const UserRouteRouteWithChildren = UserRouteRoute._addFileChildren(
+  UserRouteRouteChildren,
+)
 
 export interface FileRoutesByFullPath {
   '': typeof StoreRouteRouteWithChildren
@@ -755,7 +757,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_store': typeof StoreRouteRouteWithChildren
-  '/user': typeof UserRouteWithChildren
+  '/user': typeof UserRouteRouteWithChildren
   '/user/_authenticated': typeof UserAuthenticatedRouteRouteWithChildren
   '/(auth)/500': typeof auth500Route
   '/(auth)/otp': typeof authOtpRoute
@@ -889,7 +891,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   StoreRouteRoute: typeof StoreRouteRouteWithChildren
-  UserRoute: typeof UserRouteWithChildren
+  UserRouteRoute: typeof UserRouteRouteWithChildren
   auth500Route: typeof auth500Route
   authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
@@ -905,7 +907,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   StoreRouteRoute: StoreRouteRouteWithChildren,
-  UserRoute: UserRouteWithChildren,
+  UserRouteRoute: UserRouteRouteWithChildren,
   auth500Route: auth500Route,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
@@ -952,7 +954,7 @@ export const routeTree = rootRoute
       ]
     },
     "/user": {
-      "filePath": "user/_authenticated",
+      "filePath": "user/route.tsx",
       "children": [
         "/user/_authenticated"
       ]
