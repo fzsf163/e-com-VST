@@ -29,7 +29,7 @@ export function CarouselMain() {
   }, [api])
 
   return (
-    <div className='w-full max-w-screen-xl mx-auto my-5'>
+    <div className='w-full max-w-sm lg:max-w-screen-lg'>
       <Carousel
         opts={{
           align: 'start',
@@ -47,7 +47,7 @@ export function CarouselMain() {
             <CarouselItem key={index}>
               <div className='p-1'>
                 <Card>
-                  <CardContent className='flex h-[30rem]  items-center justify-center p-6'>
+                  <CardContent className='flex h-[30rem] items-center justify-center p-6 '>
                     <span className='text-4xl font-semibold'>{index + 1}</span>
                   </CardContent>
                 </Card>
