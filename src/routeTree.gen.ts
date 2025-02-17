@@ -13,14 +13,18 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
-import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
+import { Route as StoreRouteImport } from './routes/_store/route'
+import { Route as StoreIndexImport } from './routes/_store/index'
+import { Route as StoreAboutImport } from './routes/_store/about'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as auth500Import } from './routes/(auth)/500'
+import { Route as UserAuthenticatedRouteImport } from './routes/user/_authenticated/route'
+import { Route as UserAuthenticatedIndexImport } from './routes/user/_authenticated/index'
 
 // Create Virtual Routes
 
+const UserImport = createFileRoute('/user')()
 const errors503LazyImport = createFileRoute('/(errors)/503')()
 const errors500LazyImport = createFileRoute('/(errors)/500')()
 const errors404LazyImport = createFileRoute('/(errors)/404')()
@@ -31,63 +35,69 @@ const authSignIn2LazyImport = createFileRoute('/(auth)/sign-in-2')()
 const authForgotPasswordLazyImport = createFileRoute(
   '/(auth)/forgot-password',
 )()
-const AuthenticatedSettingsRouteLazyImport = createFileRoute(
-  '/_authenticated/settings',
+const UserAuthenticatedSettingsRouteLazyImport = createFileRoute(
+  '/user/_authenticated/settings',
 )()
-const AuthenticatedUsersIndexLazyImport = createFileRoute(
-  '/_authenticated/users/',
+const UserAuthenticatedUsersIndexLazyImport = createFileRoute(
+  '/user/_authenticated/users/',
 )()
-const AuthenticatedSettingsIndexLazyImport = createFileRoute(
-  '/_authenticated/settings/',
+const UserAuthenticatedSettingsIndexLazyImport = createFileRoute(
+  '/user/_authenticated/settings/',
 )()
-const AuthenticatedProductsIndexLazyImport = createFileRoute(
-  '/_authenticated/products/',
+const UserAuthenticatedProductsIndexLazyImport = createFileRoute(
+  '/user/_authenticated/products/',
 )()
-const AuthenticatedOrdersIndexLazyImport = createFileRoute(
-  '/_authenticated/orders/',
+const UserAuthenticatedOrdersIndexLazyImport = createFileRoute(
+  '/user/_authenticated/orders/',
 )()
-const AuthenticatedHelpCenterIndexLazyImport = createFileRoute(
-  '/_authenticated/help-center/',
+const UserAuthenticatedHelpCenterIndexLazyImport = createFileRoute(
+  '/user/_authenticated/help-center/',
 )()
-const AuthenticatedDraftsIndexLazyImport = createFileRoute(
-  '/_authenticated/drafts/',
+const UserAuthenticatedDraftsIndexLazyImport = createFileRoute(
+  '/user/_authenticated/drafts/',
 )()
-const AuthenticatedChatsIndexLazyImport = createFileRoute(
-  '/_authenticated/chats/',
+const UserAuthenticatedChatsIndexLazyImport = createFileRoute(
+  '/user/_authenticated/chats/',
 )()
-const AuthenticatedAppsIndexLazyImport = createFileRoute(
-  '/_authenticated/apps/',
+const UserAuthenticatedAppsIndexLazyImport = createFileRoute(
+  '/user/_authenticated/apps/',
 )()
-const AuthenticatedAcheckoutsIndexLazyImport = createFileRoute(
-  '/_authenticated/acheckouts/',
+const UserAuthenticatedAcheckoutsIndexLazyImport = createFileRoute(
+  '/user/_authenticated/acheckouts/',
 )()
-const AuthenticatedSettingsNotificationsLazyImport = createFileRoute(
-  '/_authenticated/settings/notifications',
+const UserAuthenticatedSettingsNotificationsLazyImport = createFileRoute(
+  '/user/_authenticated/settings/notifications',
 )()
-const AuthenticatedSettingsDisplayLazyImport = createFileRoute(
-  '/_authenticated/settings/display',
+const UserAuthenticatedSettingsDisplayLazyImport = createFileRoute(
+  '/user/_authenticated/settings/display',
 )()
-const AuthenticatedSettingsAppearanceLazyImport = createFileRoute(
-  '/_authenticated/settings/appearance',
+const UserAuthenticatedSettingsAppearanceLazyImport = createFileRoute(
+  '/user/_authenticated/settings/appearance',
 )()
-const AuthenticatedSettingsAccountLazyImport = createFileRoute(
-  '/_authenticated/settings/account',
+const UserAuthenticatedSettingsAccountLazyImport = createFileRoute(
+  '/user/_authenticated/settings/account',
 )()
-const AuthenticatedProductsSectionIndexLazyImport = createFileRoute(
-  '/_authenticated/products/$section/',
+const UserAuthenticatedProductsSectionIndexLazyImport = createFileRoute(
+  '/user/_authenticated/products/$section/',
 )()
 
 // Create/Update Routes
 
-const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
-  id: '/_authenticated',
+const UserRoute = UserImport.update({
+  id: '/user',
+  path: '/user',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
+const StoreRouteRoute = StoreRouteImport.update({
+  id: '/_store',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const StoreIndexRoute = StoreIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => StoreRouteRoute,
 } as any)
 
 const errors503LazyRoute = errors503LazyImport
@@ -156,14 +166,11 @@ const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
     import('./routes/(auth)/forgot-password.lazy').then((d) => d.Route),
   )
 
-const AuthenticatedSettingsRouteLazyRoute =
-  AuthenticatedSettingsRouteLazyImport.update({
-    id: '/settings',
-    path: '/settings',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/settings/route.lazy').then((d) => d.Route),
-  )
+const StoreAboutRoute = StoreAboutImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => StoreRouteRoute,
+} as any)
 
 const authSignInRoute = authSignInImport.update({
   id: '/(auth)/sign-in',
@@ -183,143 +190,176 @@ const auth500Route = auth500Import.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthenticatedUsersIndexLazyRoute =
-  AuthenticatedUsersIndexLazyImport.update({
+const UserAuthenticatedRouteRoute = UserAuthenticatedRouteImport.update({
+  id: '/user/_authenticated',
+  getParentRoute: () => UserRoute,
+} as any)
+
+const UserAuthenticatedIndexRoute = UserAuthenticatedIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => UserAuthenticatedRouteRoute,
+} as any)
+
+const UserAuthenticatedSettingsRouteLazyRoute =
+  UserAuthenticatedSettingsRouteLazyImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => UserAuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/user/_authenticated/settings/route.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const UserAuthenticatedUsersIndexLazyRoute =
+  UserAuthenticatedUsersIndexLazyImport.update({
     id: '/users/',
     path: '/users/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/users/index.lazy').then((d) => d.Route),
+    import('./routes/user/_authenticated/users/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedSettingsIndexLazyRoute =
-  AuthenticatedSettingsIndexLazyImport.update({
+const UserAuthenticatedSettingsIndexLazyRoute =
+  UserAuthenticatedSettingsIndexLazyImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+    getParentRoute: () => UserAuthenticatedSettingsRouteLazyRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/settings/index.lazy').then((d) => d.Route),
+    import('./routes/user/_authenticated/settings/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedProductsIndexLazyRoute =
-  AuthenticatedProductsIndexLazyImport.update({
+const UserAuthenticatedProductsIndexLazyRoute =
+  UserAuthenticatedProductsIndexLazyImport.update({
     id: '/products/',
     path: '/products/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/products/index.lazy').then((d) => d.Route),
+    import('./routes/user/_authenticated/products/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedOrdersIndexLazyRoute =
-  AuthenticatedOrdersIndexLazyImport.update({
+const UserAuthenticatedOrdersIndexLazyRoute =
+  UserAuthenticatedOrdersIndexLazyImport.update({
     id: '/orders/',
     path: '/orders/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/orders/index.lazy').then((d) => d.Route),
+    import('./routes/user/_authenticated/orders/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedHelpCenterIndexLazyRoute =
-  AuthenticatedHelpCenterIndexLazyImport.update({
+const UserAuthenticatedHelpCenterIndexLazyRoute =
+  UserAuthenticatedHelpCenterIndexLazyImport.update({
     id: '/help-center/',
     path: '/help-center/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/help-center/index.lazy').then(
+    import('./routes/user/_authenticated/help-center/index.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const AuthenticatedDraftsIndexLazyRoute =
-  AuthenticatedDraftsIndexLazyImport.update({
+const UserAuthenticatedDraftsIndexLazyRoute =
+  UserAuthenticatedDraftsIndexLazyImport.update({
     id: '/drafts/',
     path: '/drafts/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/drafts/index.lazy').then((d) => d.Route),
+    import('./routes/user/_authenticated/drafts/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedChatsIndexLazyRoute =
-  AuthenticatedChatsIndexLazyImport.update({
+const UserAuthenticatedChatsIndexLazyRoute =
+  UserAuthenticatedChatsIndexLazyImport.update({
     id: '/chats/',
     path: '/chats/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/chats/index.lazy').then((d) => d.Route),
+    import('./routes/user/_authenticated/chats/index.lazy').then(
+      (d) => d.Route,
+    ),
   )
 
-const AuthenticatedAppsIndexLazyRoute = AuthenticatedAppsIndexLazyImport.update(
-  {
+const UserAuthenticatedAppsIndexLazyRoute =
+  UserAuthenticatedAppsIndexLazyImport.update({
     id: '/apps/',
     path: '/apps/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any,
-).lazy(() =>
-  import('./routes/_authenticated/apps/index.lazy').then((d) => d.Route),
-)
+    getParentRoute: () => UserAuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/user/_authenticated/apps/index.lazy').then((d) => d.Route),
+  )
 
-const AuthenticatedAcheckoutsIndexLazyRoute =
-  AuthenticatedAcheckoutsIndexLazyImport.update({
+const UserAuthenticatedAcheckoutsIndexLazyRoute =
+  UserAuthenticatedAcheckoutsIndexLazyImport.update({
     id: '/acheckouts/',
     path: '/acheckouts/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/acheckouts/index.lazy').then(
+    import('./routes/user/_authenticated/acheckouts/index.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const AuthenticatedSettingsNotificationsLazyRoute =
-  AuthenticatedSettingsNotificationsLazyImport.update({
+const UserAuthenticatedSettingsNotificationsLazyRoute =
+  UserAuthenticatedSettingsNotificationsLazyImport.update({
     id: '/notifications',
     path: '/notifications',
-    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+    getParentRoute: () => UserAuthenticatedSettingsRouteLazyRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/settings/notifications.lazy').then(
+    import('./routes/user/_authenticated/settings/notifications.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const AuthenticatedSettingsDisplayLazyRoute =
-  AuthenticatedSettingsDisplayLazyImport.update({
+const UserAuthenticatedSettingsDisplayLazyRoute =
+  UserAuthenticatedSettingsDisplayLazyImport.update({
     id: '/display',
     path: '/display',
-    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+    getParentRoute: () => UserAuthenticatedSettingsRouteLazyRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/settings/display.lazy').then(
+    import('./routes/user/_authenticated/settings/display.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const AuthenticatedSettingsAppearanceLazyRoute =
-  AuthenticatedSettingsAppearanceLazyImport.update({
+const UserAuthenticatedSettingsAppearanceLazyRoute =
+  UserAuthenticatedSettingsAppearanceLazyImport.update({
     id: '/appearance',
     path: '/appearance',
-    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+    getParentRoute: () => UserAuthenticatedSettingsRouteLazyRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/settings/appearance.lazy').then(
+    import('./routes/user/_authenticated/settings/appearance.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const AuthenticatedSettingsAccountLazyRoute =
-  AuthenticatedSettingsAccountLazyImport.update({
+const UserAuthenticatedSettingsAccountLazyRoute =
+  UserAuthenticatedSettingsAccountLazyImport.update({
     id: '/account',
     path: '/account',
-    getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
+    getParentRoute: () => UserAuthenticatedSettingsRouteLazyRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/settings/account.lazy').then(
+    import('./routes/user/_authenticated/settings/account.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const AuthenticatedProductsSectionIndexLazyRoute =
-  AuthenticatedProductsSectionIndexLazyImport.update({
+const UserAuthenticatedProductsSectionIndexLazyRoute =
+  UserAuthenticatedProductsSectionIndexLazyImport.update({
     id: '/products/$section/',
     path: '/products/$section/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => UserAuthenticatedRouteRoute,
   } as any).lazy(() =>
-    import('./routes/_authenticated/products/$section/index.lazy').then(
+    import('./routes/user/_authenticated/products/$section/index.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -328,12 +368,26 @@ const AuthenticatedProductsSectionIndexLazyRoute =
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_authenticated': {
-      id: '/_authenticated'
+    '/_store': {
+      id: '/_store'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AuthenticatedRouteImport
+      preLoaderRoute: typeof StoreRouteImport
       parentRoute: typeof rootRoute
+    }
+    '/user': {
+      id: '/user'
+      path: '/user'
+      fullPath: '/user'
+      preLoaderRoute: typeof UserImport
+      parentRoute: typeof rootRoute
+    }
+    '/user/_authenticated': {
+      id: '/user/_authenticated'
+      path: '/user'
+      fullPath: '/user'
+      preLoaderRoute: typeof UserAuthenticatedRouteImport
+      parentRoute: typeof UserRoute
     }
     '/(auth)/500': {
       id: '/(auth)/500'
@@ -356,12 +410,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignInImport
       parentRoute: typeof rootRoute
     }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+    '/_store/about': {
+      id: '/_store/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof StoreAboutImport
+      parentRoute: typeof StoreRouteImport
     }
     '/(auth)/forgot-password': {
       id: '/(auth)/forgot-password'
@@ -419,181 +473,229 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof errors503LazyImport
       parentRoute: typeof rootRoute
     }
-    '/_authenticated/': {
-      id: '/_authenticated/'
+    '/_store/': {
+      id: '/_store/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
+      preLoaderRoute: typeof StoreIndexImport
+      parentRoute: typeof StoreRouteImport
     }
-    '/_authenticated/settings/account': {
-      id: '/_authenticated/settings/account'
-      path: '/account'
-      fullPath: '/settings/account'
-      preLoaderRoute: typeof AuthenticatedSettingsAccountLazyImport
-      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
+    '/user/_authenticated/settings': {
+      id: '/user/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/user/settings'
+      preLoaderRoute: typeof UserAuthenticatedSettingsRouteLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
     }
-    '/_authenticated/settings/appearance': {
-      id: '/_authenticated/settings/appearance'
-      path: '/appearance'
-      fullPath: '/settings/appearance'
-      preLoaderRoute: typeof AuthenticatedSettingsAppearanceLazyImport
-      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
-    }
-    '/_authenticated/settings/display': {
-      id: '/_authenticated/settings/display'
-      path: '/display'
-      fullPath: '/settings/display'
-      preLoaderRoute: typeof AuthenticatedSettingsDisplayLazyImport
-      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
-    }
-    '/_authenticated/settings/notifications': {
-      id: '/_authenticated/settings/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof AuthenticatedSettingsNotificationsLazyImport
-      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
-    }
-    '/_authenticated/acheckouts/': {
-      id: '/_authenticated/acheckouts/'
-      path: '/acheckouts'
-      fullPath: '/acheckouts'
-      preLoaderRoute: typeof AuthenticatedAcheckoutsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/apps/': {
-      id: '/_authenticated/apps/'
-      path: '/apps'
-      fullPath: '/apps'
-      preLoaderRoute: typeof AuthenticatedAppsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/chats/': {
-      id: '/_authenticated/chats/'
-      path: '/chats'
-      fullPath: '/chats'
-      preLoaderRoute: typeof AuthenticatedChatsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/drafts/': {
-      id: '/_authenticated/drafts/'
-      path: '/drafts'
-      fullPath: '/drafts'
-      preLoaderRoute: typeof AuthenticatedDraftsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/help-center/': {
-      id: '/_authenticated/help-center/'
-      path: '/help-center'
-      fullPath: '/help-center'
-      preLoaderRoute: typeof AuthenticatedHelpCenterIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/orders/': {
-      id: '/_authenticated/orders/'
-      path: '/orders'
-      fullPath: '/orders'
-      preLoaderRoute: typeof AuthenticatedOrdersIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/products/': {
-      id: '/_authenticated/products/'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof AuthenticatedProductsIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/settings/': {
-      id: '/_authenticated/settings/'
+    '/user/_authenticated/': {
+      id: '/user/_authenticated/'
       path: '/'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof AuthenticatedSettingsIndexLazyImport
-      parentRoute: typeof AuthenticatedSettingsRouteLazyImport
+      fullPath: '/user/'
+      preLoaderRoute: typeof UserAuthenticatedIndexImport
+      parentRoute: typeof UserAuthenticatedRouteImport
     }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
+    '/user/_authenticated/settings/account': {
+      id: '/user/_authenticated/settings/account'
+      path: '/account'
+      fullPath: '/user/settings/account'
+      preLoaderRoute: typeof UserAuthenticatedSettingsAccountLazyImport
+      parentRoute: typeof UserAuthenticatedSettingsRouteLazyImport
+    }
+    '/user/_authenticated/settings/appearance': {
+      id: '/user/_authenticated/settings/appearance'
+      path: '/appearance'
+      fullPath: '/user/settings/appearance'
+      preLoaderRoute: typeof UserAuthenticatedSettingsAppearanceLazyImport
+      parentRoute: typeof UserAuthenticatedSettingsRouteLazyImport
+    }
+    '/user/_authenticated/settings/display': {
+      id: '/user/_authenticated/settings/display'
+      path: '/display'
+      fullPath: '/user/settings/display'
+      preLoaderRoute: typeof UserAuthenticatedSettingsDisplayLazyImport
+      parentRoute: typeof UserAuthenticatedSettingsRouteLazyImport
+    }
+    '/user/_authenticated/settings/notifications': {
+      id: '/user/_authenticated/settings/notifications'
+      path: '/notifications'
+      fullPath: '/user/settings/notifications'
+      preLoaderRoute: typeof UserAuthenticatedSettingsNotificationsLazyImport
+      parentRoute: typeof UserAuthenticatedSettingsRouteLazyImport
+    }
+    '/user/_authenticated/acheckouts/': {
+      id: '/user/_authenticated/acheckouts/'
+      path: '/acheckouts'
+      fullPath: '/user/acheckouts'
+      preLoaderRoute: typeof UserAuthenticatedAcheckoutsIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
+    }
+    '/user/_authenticated/apps/': {
+      id: '/user/_authenticated/apps/'
+      path: '/apps'
+      fullPath: '/user/apps'
+      preLoaderRoute: typeof UserAuthenticatedAppsIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
+    }
+    '/user/_authenticated/chats/': {
+      id: '/user/_authenticated/chats/'
+      path: '/chats'
+      fullPath: '/user/chats'
+      preLoaderRoute: typeof UserAuthenticatedChatsIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
+    }
+    '/user/_authenticated/drafts/': {
+      id: '/user/_authenticated/drafts/'
+      path: '/drafts'
+      fullPath: '/user/drafts'
+      preLoaderRoute: typeof UserAuthenticatedDraftsIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
+    }
+    '/user/_authenticated/help-center/': {
+      id: '/user/_authenticated/help-center/'
+      path: '/help-center'
+      fullPath: '/user/help-center'
+      preLoaderRoute: typeof UserAuthenticatedHelpCenterIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
+    }
+    '/user/_authenticated/orders/': {
+      id: '/user/_authenticated/orders/'
+      path: '/orders'
+      fullPath: '/user/orders'
+      preLoaderRoute: typeof UserAuthenticatedOrdersIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
+    }
+    '/user/_authenticated/products/': {
+      id: '/user/_authenticated/products/'
+      path: '/products'
+      fullPath: '/user/products'
+      preLoaderRoute: typeof UserAuthenticatedProductsIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
+    }
+    '/user/_authenticated/settings/': {
+      id: '/user/_authenticated/settings/'
+      path: '/'
+      fullPath: '/user/settings/'
+      preLoaderRoute: typeof UserAuthenticatedSettingsIndexLazyImport
+      parentRoute: typeof UserAuthenticatedSettingsRouteLazyImport
+    }
+    '/user/_authenticated/users/': {
+      id: '/user/_authenticated/users/'
       path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+      fullPath: '/user/users'
+      preLoaderRoute: typeof UserAuthenticatedUsersIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
     }
-    '/_authenticated/products/$section/': {
-      id: '/_authenticated/products/$section/'
+    '/user/_authenticated/products/$section/': {
+      id: '/user/_authenticated/products/$section/'
       path: '/products/$section'
-      fullPath: '/products/$section'
-      preLoaderRoute: typeof AuthenticatedProductsSectionIndexLazyImport
-      parentRoute: typeof AuthenticatedRouteImport
+      fullPath: '/user/products/$section'
+      preLoaderRoute: typeof UserAuthenticatedProductsSectionIndexLazyImport
+      parentRoute: typeof UserAuthenticatedRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface AuthenticatedSettingsRouteLazyRouteChildren {
-  AuthenticatedSettingsAccountLazyRoute: typeof AuthenticatedSettingsAccountLazyRoute
-  AuthenticatedSettingsAppearanceLazyRoute: typeof AuthenticatedSettingsAppearanceLazyRoute
-  AuthenticatedSettingsDisplayLazyRoute: typeof AuthenticatedSettingsDisplayLazyRoute
-  AuthenticatedSettingsNotificationsLazyRoute: typeof AuthenticatedSettingsNotificationsLazyRoute
-  AuthenticatedSettingsIndexLazyRoute: typeof AuthenticatedSettingsIndexLazyRoute
+interface StoreRouteRouteChildren {
+  StoreAboutRoute: typeof StoreAboutRoute
+  StoreIndexRoute: typeof StoreIndexRoute
 }
 
-const AuthenticatedSettingsRouteLazyRouteChildren: AuthenticatedSettingsRouteLazyRouteChildren =
+const StoreRouteRouteChildren: StoreRouteRouteChildren = {
+  StoreAboutRoute: StoreAboutRoute,
+  StoreIndexRoute: StoreIndexRoute,
+}
+
+const StoreRouteRouteWithChildren = StoreRouteRoute._addFileChildren(
+  StoreRouteRouteChildren,
+)
+
+interface UserAuthenticatedSettingsRouteLazyRouteChildren {
+  UserAuthenticatedSettingsAccountLazyRoute: typeof UserAuthenticatedSettingsAccountLazyRoute
+  UserAuthenticatedSettingsAppearanceLazyRoute: typeof UserAuthenticatedSettingsAppearanceLazyRoute
+  UserAuthenticatedSettingsDisplayLazyRoute: typeof UserAuthenticatedSettingsDisplayLazyRoute
+  UserAuthenticatedSettingsNotificationsLazyRoute: typeof UserAuthenticatedSettingsNotificationsLazyRoute
+  UserAuthenticatedSettingsIndexLazyRoute: typeof UserAuthenticatedSettingsIndexLazyRoute
+}
+
+const UserAuthenticatedSettingsRouteLazyRouteChildren: UserAuthenticatedSettingsRouteLazyRouteChildren =
   {
-    AuthenticatedSettingsAccountLazyRoute:
-      AuthenticatedSettingsAccountLazyRoute,
-    AuthenticatedSettingsAppearanceLazyRoute:
-      AuthenticatedSettingsAppearanceLazyRoute,
-    AuthenticatedSettingsDisplayLazyRoute:
-      AuthenticatedSettingsDisplayLazyRoute,
-    AuthenticatedSettingsNotificationsLazyRoute:
-      AuthenticatedSettingsNotificationsLazyRoute,
-    AuthenticatedSettingsIndexLazyRoute: AuthenticatedSettingsIndexLazyRoute,
+    UserAuthenticatedSettingsAccountLazyRoute:
+      UserAuthenticatedSettingsAccountLazyRoute,
+    UserAuthenticatedSettingsAppearanceLazyRoute:
+      UserAuthenticatedSettingsAppearanceLazyRoute,
+    UserAuthenticatedSettingsDisplayLazyRoute:
+      UserAuthenticatedSettingsDisplayLazyRoute,
+    UserAuthenticatedSettingsNotificationsLazyRoute:
+      UserAuthenticatedSettingsNotificationsLazyRoute,
+    UserAuthenticatedSettingsIndexLazyRoute:
+      UserAuthenticatedSettingsIndexLazyRoute,
   }
 
-const AuthenticatedSettingsRouteLazyRouteWithChildren =
-  AuthenticatedSettingsRouteLazyRoute._addFileChildren(
-    AuthenticatedSettingsRouteLazyRouteChildren,
+const UserAuthenticatedSettingsRouteLazyRouteWithChildren =
+  UserAuthenticatedSettingsRouteLazyRoute._addFileChildren(
+    UserAuthenticatedSettingsRouteLazyRouteChildren,
   )
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedAcheckoutsIndexLazyRoute: typeof AuthenticatedAcheckoutsIndexLazyRoute
-  AuthenticatedAppsIndexLazyRoute: typeof AuthenticatedAppsIndexLazyRoute
-  AuthenticatedChatsIndexLazyRoute: typeof AuthenticatedChatsIndexLazyRoute
-  AuthenticatedDraftsIndexLazyRoute: typeof AuthenticatedDraftsIndexLazyRoute
-  AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
-  AuthenticatedOrdersIndexLazyRoute: typeof AuthenticatedOrdersIndexLazyRoute
-  AuthenticatedProductsIndexLazyRoute: typeof AuthenticatedProductsIndexLazyRoute
-  AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
-  AuthenticatedProductsSectionIndexLazyRoute: typeof AuthenticatedProductsSectionIndexLazyRoute
+interface UserAuthenticatedRouteRouteChildren {
+  UserAuthenticatedSettingsRouteLazyRoute: typeof UserAuthenticatedSettingsRouteLazyRouteWithChildren
+  UserAuthenticatedIndexRoute: typeof UserAuthenticatedIndexRoute
+  UserAuthenticatedAcheckoutsIndexLazyRoute: typeof UserAuthenticatedAcheckoutsIndexLazyRoute
+  UserAuthenticatedAppsIndexLazyRoute: typeof UserAuthenticatedAppsIndexLazyRoute
+  UserAuthenticatedChatsIndexLazyRoute: typeof UserAuthenticatedChatsIndexLazyRoute
+  UserAuthenticatedDraftsIndexLazyRoute: typeof UserAuthenticatedDraftsIndexLazyRoute
+  UserAuthenticatedHelpCenterIndexLazyRoute: typeof UserAuthenticatedHelpCenterIndexLazyRoute
+  UserAuthenticatedOrdersIndexLazyRoute: typeof UserAuthenticatedOrdersIndexLazyRoute
+  UserAuthenticatedProductsIndexLazyRoute: typeof UserAuthenticatedProductsIndexLazyRoute
+  UserAuthenticatedUsersIndexLazyRoute: typeof UserAuthenticatedUsersIndexLazyRoute
+  UserAuthenticatedProductsSectionIndexLazyRoute: typeof UserAuthenticatedProductsSectionIndexLazyRoute
 }
 
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedSettingsRouteLazyRoute:
-    AuthenticatedSettingsRouteLazyRouteWithChildren,
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedAcheckoutsIndexLazyRoute: AuthenticatedAcheckoutsIndexLazyRoute,
-  AuthenticatedAppsIndexLazyRoute: AuthenticatedAppsIndexLazyRoute,
-  AuthenticatedChatsIndexLazyRoute: AuthenticatedChatsIndexLazyRoute,
-  AuthenticatedDraftsIndexLazyRoute: AuthenticatedDraftsIndexLazyRoute,
-  AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
-  AuthenticatedOrdersIndexLazyRoute: AuthenticatedOrdersIndexLazyRoute,
-  AuthenticatedProductsIndexLazyRoute: AuthenticatedProductsIndexLazyRoute,
-  AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
-  AuthenticatedProductsSectionIndexLazyRoute:
-    AuthenticatedProductsSectionIndexLazyRoute,
+const UserAuthenticatedRouteRouteChildren: UserAuthenticatedRouteRouteChildren =
+  {
+    UserAuthenticatedSettingsRouteLazyRoute:
+      UserAuthenticatedSettingsRouteLazyRouteWithChildren,
+    UserAuthenticatedIndexRoute: UserAuthenticatedIndexRoute,
+    UserAuthenticatedAcheckoutsIndexLazyRoute:
+      UserAuthenticatedAcheckoutsIndexLazyRoute,
+    UserAuthenticatedAppsIndexLazyRoute: UserAuthenticatedAppsIndexLazyRoute,
+    UserAuthenticatedChatsIndexLazyRoute: UserAuthenticatedChatsIndexLazyRoute,
+    UserAuthenticatedDraftsIndexLazyRoute:
+      UserAuthenticatedDraftsIndexLazyRoute,
+    UserAuthenticatedHelpCenterIndexLazyRoute:
+      UserAuthenticatedHelpCenterIndexLazyRoute,
+    UserAuthenticatedOrdersIndexLazyRoute:
+      UserAuthenticatedOrdersIndexLazyRoute,
+    UserAuthenticatedProductsIndexLazyRoute:
+      UserAuthenticatedProductsIndexLazyRoute,
+    UserAuthenticatedUsersIndexLazyRoute: UserAuthenticatedUsersIndexLazyRoute,
+    UserAuthenticatedProductsSectionIndexLazyRoute:
+      UserAuthenticatedProductsSectionIndexLazyRoute,
+  }
+
+const UserAuthenticatedRouteRouteWithChildren =
+  UserAuthenticatedRouteRoute._addFileChildren(
+    UserAuthenticatedRouteRouteChildren,
+  )
+
+interface UserRouteChildren {
+  UserAuthenticatedRouteRoute: typeof UserAuthenticatedRouteRouteWithChildren
 }
 
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+const UserRouteChildren: UserRouteChildren = {
+  UserAuthenticatedRouteRoute: UserAuthenticatedRouteRouteWithChildren,
+}
+
+const UserRouteWithChildren = UserRoute._addFileChildren(UserRouteChildren)
 
 export interface FileRoutesByFullPath {
-  '': typeof AuthenticatedRouteRouteWithChildren
+  '': typeof StoreRouteRouteWithChildren
+  '/user': typeof UserAuthenticatedRouteRouteWithChildren
   '/500': typeof errors500LazyRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
+  '/about': typeof StoreAboutRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -601,27 +703,31 @@ export interface FileRoutesByFullPath {
   '/403': typeof errors403LazyRoute
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
-  '/': typeof AuthenticatedIndexRoute
-  '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
-  '/acheckouts': typeof AuthenticatedAcheckoutsIndexLazyRoute
-  '/apps': typeof AuthenticatedAppsIndexLazyRoute
-  '/chats': typeof AuthenticatedChatsIndexLazyRoute
-  '/drafts': typeof AuthenticatedDraftsIndexLazyRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
-  '/orders': typeof AuthenticatedOrdersIndexLazyRoute
-  '/products': typeof AuthenticatedProductsIndexLazyRoute
-  '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
-  '/users': typeof AuthenticatedUsersIndexLazyRoute
-  '/products/$section': typeof AuthenticatedProductsSectionIndexLazyRoute
+  '/': typeof StoreIndexRoute
+  '/user/settings': typeof UserAuthenticatedSettingsRouteLazyRouteWithChildren
+  '/user/': typeof UserAuthenticatedIndexRoute
+  '/user/settings/account': typeof UserAuthenticatedSettingsAccountLazyRoute
+  '/user/settings/appearance': typeof UserAuthenticatedSettingsAppearanceLazyRoute
+  '/user/settings/display': typeof UserAuthenticatedSettingsDisplayLazyRoute
+  '/user/settings/notifications': typeof UserAuthenticatedSettingsNotificationsLazyRoute
+  '/user/acheckouts': typeof UserAuthenticatedAcheckoutsIndexLazyRoute
+  '/user/apps': typeof UserAuthenticatedAppsIndexLazyRoute
+  '/user/chats': typeof UserAuthenticatedChatsIndexLazyRoute
+  '/user/drafts': typeof UserAuthenticatedDraftsIndexLazyRoute
+  '/user/help-center': typeof UserAuthenticatedHelpCenterIndexLazyRoute
+  '/user/orders': typeof UserAuthenticatedOrdersIndexLazyRoute
+  '/user/products': typeof UserAuthenticatedProductsIndexLazyRoute
+  '/user/settings/': typeof UserAuthenticatedSettingsIndexLazyRoute
+  '/user/users': typeof UserAuthenticatedUsersIndexLazyRoute
+  '/user/products/$section': typeof UserAuthenticatedProductsSectionIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
+  '/user': typeof UserAuthenticatedIndexRoute
   '/500': typeof errors500LazyRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
+  '/about': typeof StoreAboutRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -629,30 +735,32 @@ export interface FileRoutesByTo {
   '/403': typeof errors403LazyRoute
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
-  '/': typeof AuthenticatedIndexRoute
-  '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
-  '/acheckouts': typeof AuthenticatedAcheckoutsIndexLazyRoute
-  '/apps': typeof AuthenticatedAppsIndexLazyRoute
-  '/chats': typeof AuthenticatedChatsIndexLazyRoute
-  '/drafts': typeof AuthenticatedDraftsIndexLazyRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
-  '/orders': typeof AuthenticatedOrdersIndexLazyRoute
-  '/products': typeof AuthenticatedProductsIndexLazyRoute
-  '/settings': typeof AuthenticatedSettingsIndexLazyRoute
-  '/users': typeof AuthenticatedUsersIndexLazyRoute
-  '/products/$section': typeof AuthenticatedProductsSectionIndexLazyRoute
+  '/': typeof StoreIndexRoute
+  '/user/settings/account': typeof UserAuthenticatedSettingsAccountLazyRoute
+  '/user/settings/appearance': typeof UserAuthenticatedSettingsAppearanceLazyRoute
+  '/user/settings/display': typeof UserAuthenticatedSettingsDisplayLazyRoute
+  '/user/settings/notifications': typeof UserAuthenticatedSettingsNotificationsLazyRoute
+  '/user/acheckouts': typeof UserAuthenticatedAcheckoutsIndexLazyRoute
+  '/user/apps': typeof UserAuthenticatedAppsIndexLazyRoute
+  '/user/chats': typeof UserAuthenticatedChatsIndexLazyRoute
+  '/user/drafts': typeof UserAuthenticatedDraftsIndexLazyRoute
+  '/user/help-center': typeof UserAuthenticatedHelpCenterIndexLazyRoute
+  '/user/orders': typeof UserAuthenticatedOrdersIndexLazyRoute
+  '/user/products': typeof UserAuthenticatedProductsIndexLazyRoute
+  '/user/settings': typeof UserAuthenticatedSettingsIndexLazyRoute
+  '/user/users': typeof UserAuthenticatedUsersIndexLazyRoute
+  '/user/products/$section': typeof UserAuthenticatedProductsSectionIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_store': typeof StoreRouteRouteWithChildren
+  '/user': typeof UserRouteWithChildren
+  '/user/_authenticated': typeof UserAuthenticatedRouteRouteWithChildren
   '/(auth)/500': typeof auth500Route
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
-  '/_authenticated/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
+  '/_store/about': typeof StoreAboutRoute
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
   '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
   '/(auth)/sign-up': typeof authSignUpLazyRoute
@@ -661,31 +769,34 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404LazyRoute
   '/(errors)/500': typeof errors500LazyRoute
   '/(errors)/503': typeof errors503LazyRoute
-  '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
-  '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
-  '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
-  '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
-  '/_authenticated/acheckouts/': typeof AuthenticatedAcheckoutsIndexLazyRoute
-  '/_authenticated/apps/': typeof AuthenticatedAppsIndexLazyRoute
-  '/_authenticated/chats/': typeof AuthenticatedChatsIndexLazyRoute
-  '/_authenticated/drafts/': typeof AuthenticatedDraftsIndexLazyRoute
-  '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
-  '/_authenticated/orders/': typeof AuthenticatedOrdersIndexLazyRoute
-  '/_authenticated/products/': typeof AuthenticatedProductsIndexLazyRoute
-  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
-  '/_authenticated/products/$section/': typeof AuthenticatedProductsSectionIndexLazyRoute
+  '/_store/': typeof StoreIndexRoute
+  '/user/_authenticated/settings': typeof UserAuthenticatedSettingsRouteLazyRouteWithChildren
+  '/user/_authenticated/': typeof UserAuthenticatedIndexRoute
+  '/user/_authenticated/settings/account': typeof UserAuthenticatedSettingsAccountLazyRoute
+  '/user/_authenticated/settings/appearance': typeof UserAuthenticatedSettingsAppearanceLazyRoute
+  '/user/_authenticated/settings/display': typeof UserAuthenticatedSettingsDisplayLazyRoute
+  '/user/_authenticated/settings/notifications': typeof UserAuthenticatedSettingsNotificationsLazyRoute
+  '/user/_authenticated/acheckouts/': typeof UserAuthenticatedAcheckoutsIndexLazyRoute
+  '/user/_authenticated/apps/': typeof UserAuthenticatedAppsIndexLazyRoute
+  '/user/_authenticated/chats/': typeof UserAuthenticatedChatsIndexLazyRoute
+  '/user/_authenticated/drafts/': typeof UserAuthenticatedDraftsIndexLazyRoute
+  '/user/_authenticated/help-center/': typeof UserAuthenticatedHelpCenterIndexLazyRoute
+  '/user/_authenticated/orders/': typeof UserAuthenticatedOrdersIndexLazyRoute
+  '/user/_authenticated/products/': typeof UserAuthenticatedProductsIndexLazyRoute
+  '/user/_authenticated/settings/': typeof UserAuthenticatedSettingsIndexLazyRoute
+  '/user/_authenticated/users/': typeof UserAuthenticatedUsersIndexLazyRoute
+  '/user/_authenticated/products/$section/': typeof UserAuthenticatedProductsSectionIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/user'
     | '/500'
     | '/otp'
     | '/sign-in'
-    | '/settings'
+    | '/about'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -694,25 +805,29 @@ export interface FileRouteTypes {
     | '/404'
     | '/503'
     | '/'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/acheckouts'
-    | '/apps'
-    | '/chats'
-    | '/drafts'
-    | '/help-center'
-    | '/orders'
-    | '/products'
-    | '/settings/'
-    | '/users'
-    | '/products/$section'
+    | '/user/settings'
+    | '/user/'
+    | '/user/settings/account'
+    | '/user/settings/appearance'
+    | '/user/settings/display'
+    | '/user/settings/notifications'
+    | '/user/acheckouts'
+    | '/user/apps'
+    | '/user/chats'
+    | '/user/drafts'
+    | '/user/help-center'
+    | '/user/orders'
+    | '/user/products'
+    | '/user/settings/'
+    | '/user/users'
+    | '/user/products/$section'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/user'
     | '/500'
     | '/otp'
     | '/sign-in'
+    | '/about'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -721,27 +836,29 @@ export interface FileRouteTypes {
     | '/404'
     | '/503'
     | '/'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/acheckouts'
-    | '/apps'
-    | '/chats'
-    | '/drafts'
-    | '/help-center'
-    | '/orders'
-    | '/products'
-    | '/settings'
-    | '/users'
-    | '/products/$section'
+    | '/user/settings/account'
+    | '/user/settings/appearance'
+    | '/user/settings/display'
+    | '/user/settings/notifications'
+    | '/user/acheckouts'
+    | '/user/apps'
+    | '/user/chats'
+    | '/user/drafts'
+    | '/user/help-center'
+    | '/user/orders'
+    | '/user/products'
+    | '/user/settings'
+    | '/user/users'
+    | '/user/products/$section'
   id:
     | '__root__'
-    | '/_authenticated'
+    | '/_store'
+    | '/user'
+    | '/user/_authenticated'
     | '/(auth)/500'
     | '/(auth)/otp'
     | '/(auth)/sign-in'
-    | '/_authenticated/settings'
+    | '/_store/about'
     | '/(auth)/forgot-password'
     | '/(auth)/sign-in-2'
     | '/(auth)/sign-up'
@@ -750,26 +867,29 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
-    | '/_authenticated/'
-    | '/_authenticated/settings/account'
-    | '/_authenticated/settings/appearance'
-    | '/_authenticated/settings/display'
-    | '/_authenticated/settings/notifications'
-    | '/_authenticated/acheckouts/'
-    | '/_authenticated/apps/'
-    | '/_authenticated/chats/'
-    | '/_authenticated/drafts/'
-    | '/_authenticated/help-center/'
-    | '/_authenticated/orders/'
-    | '/_authenticated/products/'
-    | '/_authenticated/settings/'
-    | '/_authenticated/users/'
-    | '/_authenticated/products/$section/'
+    | '/_store/'
+    | '/user/_authenticated/settings'
+    | '/user/_authenticated/'
+    | '/user/_authenticated/settings/account'
+    | '/user/_authenticated/settings/appearance'
+    | '/user/_authenticated/settings/display'
+    | '/user/_authenticated/settings/notifications'
+    | '/user/_authenticated/acheckouts/'
+    | '/user/_authenticated/apps/'
+    | '/user/_authenticated/chats/'
+    | '/user/_authenticated/drafts/'
+    | '/user/_authenticated/help-center/'
+    | '/user/_authenticated/orders/'
+    | '/user/_authenticated/products/'
+    | '/user/_authenticated/settings/'
+    | '/user/_authenticated/users/'
+    | '/user/_authenticated/products/$section/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  StoreRouteRoute: typeof StoreRouteRouteWithChildren
+  UserRoute: typeof UserRouteWithChildren
   auth500Route: typeof auth500Route
   authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
@@ -784,7 +904,8 @@ export interface RootRouteChildren {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  StoreRouteRoute: StoreRouteRouteWithChildren,
+  UserRoute: UserRouteWithChildren,
   auth500Route: auth500Route,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
@@ -808,7 +929,8 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_authenticated",
+        "/_store",
+        "/user",
         "/(auth)/500",
         "/(auth)/otp",
         "/(auth)/sign-in",
@@ -822,20 +944,34 @@ export const routeTree = rootRoute
         "/(errors)/503"
       ]
     },
-    "/_authenticated": {
-      "filePath": "_authenticated/route.tsx",
+    "/_store": {
+      "filePath": "_store/route.tsx",
       "children": [
-        "/_authenticated/settings",
-        "/_authenticated/",
-        "/_authenticated/acheckouts/",
-        "/_authenticated/apps/",
-        "/_authenticated/chats/",
-        "/_authenticated/drafts/",
-        "/_authenticated/help-center/",
-        "/_authenticated/orders/",
-        "/_authenticated/products/",
-        "/_authenticated/users/",
-        "/_authenticated/products/$section/"
+        "/_store/about",
+        "/_store/"
+      ]
+    },
+    "/user": {
+      "filePath": "user/_authenticated",
+      "children": [
+        "/user/_authenticated"
+      ]
+    },
+    "/user/_authenticated": {
+      "filePath": "user/_authenticated/route.tsx",
+      "parent": "/user",
+      "children": [
+        "/user/_authenticated/settings",
+        "/user/_authenticated/",
+        "/user/_authenticated/acheckouts/",
+        "/user/_authenticated/apps/",
+        "/user/_authenticated/chats/",
+        "/user/_authenticated/drafts/",
+        "/user/_authenticated/help-center/",
+        "/user/_authenticated/orders/",
+        "/user/_authenticated/products/",
+        "/user/_authenticated/users/",
+        "/user/_authenticated/products/$section/"
       ]
     },
     "/(auth)/500": {
@@ -847,16 +983,9 @@ export const routeTree = rootRoute
     "/(auth)/sign-in": {
       "filePath": "(auth)/sign-in.tsx"
     },
-    "/_authenticated/settings": {
-      "filePath": "_authenticated/settings/route.lazy.tsx",
-      "parent": "/_authenticated",
-      "children": [
-        "/_authenticated/settings/account",
-        "/_authenticated/settings/appearance",
-        "/_authenticated/settings/display",
-        "/_authenticated/settings/notifications",
-        "/_authenticated/settings/"
-      ]
+    "/_store/about": {
+      "filePath": "_store/about.tsx",
+      "parent": "/_store"
     },
     "/(auth)/forgot-password": {
       "filePath": "(auth)/forgot-password.lazy.tsx"
@@ -882,65 +1011,80 @@ export const routeTree = rootRoute
     "/(errors)/503": {
       "filePath": "(errors)/503.lazy.tsx"
     },
-    "/_authenticated/": {
-      "filePath": "_authenticated/index.tsx",
-      "parent": "/_authenticated"
+    "/_store/": {
+      "filePath": "_store/index.tsx",
+      "parent": "/_store"
     },
-    "/_authenticated/settings/account": {
-      "filePath": "_authenticated/settings/account.lazy.tsx",
-      "parent": "/_authenticated/settings"
+    "/user/_authenticated/settings": {
+      "filePath": "user/_authenticated/settings/route.lazy.tsx",
+      "parent": "/user/_authenticated",
+      "children": [
+        "/user/_authenticated/settings/account",
+        "/user/_authenticated/settings/appearance",
+        "/user/_authenticated/settings/display",
+        "/user/_authenticated/settings/notifications",
+        "/user/_authenticated/settings/"
+      ]
     },
-    "/_authenticated/settings/appearance": {
-      "filePath": "_authenticated/settings/appearance.lazy.tsx",
-      "parent": "/_authenticated/settings"
+    "/user/_authenticated/": {
+      "filePath": "user/_authenticated/index.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/settings/display": {
-      "filePath": "_authenticated/settings/display.lazy.tsx",
-      "parent": "/_authenticated/settings"
+    "/user/_authenticated/settings/account": {
+      "filePath": "user/_authenticated/settings/account.lazy.tsx",
+      "parent": "/user/_authenticated/settings"
     },
-    "/_authenticated/settings/notifications": {
-      "filePath": "_authenticated/settings/notifications.lazy.tsx",
-      "parent": "/_authenticated/settings"
+    "/user/_authenticated/settings/appearance": {
+      "filePath": "user/_authenticated/settings/appearance.lazy.tsx",
+      "parent": "/user/_authenticated/settings"
     },
-    "/_authenticated/acheckouts/": {
-      "filePath": "_authenticated/acheckouts/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/settings/display": {
+      "filePath": "user/_authenticated/settings/display.lazy.tsx",
+      "parent": "/user/_authenticated/settings"
     },
-    "/_authenticated/apps/": {
-      "filePath": "_authenticated/apps/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/settings/notifications": {
+      "filePath": "user/_authenticated/settings/notifications.lazy.tsx",
+      "parent": "/user/_authenticated/settings"
     },
-    "/_authenticated/chats/": {
-      "filePath": "_authenticated/chats/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/acheckouts/": {
+      "filePath": "user/_authenticated/acheckouts/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/drafts/": {
-      "filePath": "_authenticated/drafts/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/apps/": {
+      "filePath": "user/_authenticated/apps/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/help-center/": {
-      "filePath": "_authenticated/help-center/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/chats/": {
+      "filePath": "user/_authenticated/chats/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/orders/": {
-      "filePath": "_authenticated/orders/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/drafts/": {
+      "filePath": "user/_authenticated/drafts/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/products/": {
-      "filePath": "_authenticated/products/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/help-center/": {
+      "filePath": "user/_authenticated/help-center/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/settings/": {
-      "filePath": "_authenticated/settings/index.lazy.tsx",
-      "parent": "/_authenticated/settings"
+    "/user/_authenticated/orders/": {
+      "filePath": "user/_authenticated/orders/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/users/": {
-      "filePath": "_authenticated/users/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/products/": {
+      "filePath": "user/_authenticated/products/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     },
-    "/_authenticated/products/$section/": {
-      "filePath": "_authenticated/products/$section/index.lazy.tsx",
-      "parent": "/_authenticated"
+    "/user/_authenticated/settings/": {
+      "filePath": "user/_authenticated/settings/index.lazy.tsx",
+      "parent": "/user/_authenticated/settings"
+    },
+    "/user/_authenticated/users/": {
+      "filePath": "user/_authenticated/users/index.lazy.tsx",
+      "parent": "/user/_authenticated"
+    },
+    "/user/_authenticated/products/$section/": {
+      "filePath": "user/_authenticated/products/$section/index.lazy.tsx",
+      "parent": "/user/_authenticated"
     }
   }
 }
