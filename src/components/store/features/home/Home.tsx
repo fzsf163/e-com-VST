@@ -1,6 +1,7 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { GearIcon } from '@radix-ui/react-icons'
 import { ShoppingBag } from 'lucide-react'
+import { ProductCarousel } from '../../shared/productCarousel'
 import { CarouselMain } from './carousel'
 
 export function Home() {
@@ -17,6 +18,7 @@ export function Home() {
           </div>
         </div>
       </div>
+      {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
       <div className='mt-20 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 max-w-screen-2xl mx-auto px-10'>
         {Array.from({ length: 4 }).map((_, index) => (
           <div className='p-1' key={index}>
@@ -34,6 +36,7 @@ export function Home() {
           </div>
         ))}
       </div>
+      {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
       <div className='mt-10'>
         <div className='text-center space-y-2'>
           <p className='font-semibold text-2xl'>FEATURED CATEGORIES</p>
@@ -59,6 +62,17 @@ export function Home() {
             </div>
           ))}
         </div>
+      </div>
+      {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
+      <div className='mt-10'>
+        <p className='font-semibold text-2xl text-center'>Ready for Order 🔥</p>
+        <div className='flex items-center justify-center mt-10'>
+          <ProductCarousel></ProductCarousel>
+        </div>
+      </div>
+      {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
+      <div className='mt-10'>
+        <p className='font-semibold text-2xl text-center'>Featured Products</p>
       </div>
     </div>
   )
