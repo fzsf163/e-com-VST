@@ -78,6 +78,13 @@ export function Home() {
           <TabsGroupProduct></TabsGroupProduct>
         </div>
       </div>
+      {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
+      <div className='mt-10 max-w-screen-2xl mx-auto h-[25rem] grid grid-cols-2 gap-4'>
+        <div className='border border-gray-200 shadow text-center text-xl rounded'>AD 1</div>
+        <div className='border border-gray-200 shadow text-center text-xl rounded'>AD 2</div>
+      </div>
+      {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
+      <div className='mt-10 max-w-screen-2xl mx-auto bg-gray-400 h-64'></div>
     </div>
   )
 }
