@@ -1,4 +1,5 @@
-import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { GearIcon } from '@radix-ui/react-icons'
 import { ShoppingBag } from 'lucide-react'
 import { ProductCarousel } from '../../shared/productCarousel'
@@ -80,11 +81,35 @@ export function Home() {
       </div>
       {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
       <div className='mt-10 max-w-screen-2xl mx-auto h-[25rem] grid grid-cols-2 gap-4'>
-        <div className='border border-gray-200 shadow text-center text-xl rounded'>AD 1</div>
-        <div className='border border-gray-200 shadow text-center text-xl rounded'>AD 2</div>
+        <div className='border border-gray-200 shadow text-center text-xl rounded'>
+          AD 1
+        </div>
+        <div className='border border-gray-200 shadow text-center text-xl rounded'>
+          AD 2
+        </div>
       </div>
       {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
-      <div className='mt-10 max-w-screen-2xl mx-auto bg-gray-400 h-64'></div>
+      <div className='mt-10'>
+        <p className='font-semibold text-2xl text-center'>New Arrival</p>
+        <p className='font-normal text-base text-center mt-4 underline underline-offset-8 decoration-orange-300 decoration-[2px]'>Gadgets</p>
+        <div className='mt-10 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10 max-w-screen-2xl mx-auto'>
+          <div className='grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-10'>
+            {Array.from({ length: 10 }).map((_, index) => (
+              <div key={index}>
+                <Card>
+                  <CardContent className='flex h-[14rem] items-center justify-center p-6 '>
+                    <span className='text-4xl font-semibold'>{index + 1}</span>
+                  </CardContent>
+                  <CardFooter className='flex items-center justify-center gap-2'>
+                    <Button className='dark:text-foreground'>Buy Now</Button>
+                    <Button variant={'outline'}>Add to cart</Button>
+                  </CardFooter>
+                </Card>
+              </div>
+            ))}
+          </div>{' '}
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import Footer from '@/components/store/shared/footer'
 import { SheetSide } from '@/components/store/shared/mobileNav'
 import SearchWithModal from '@/components/store/shared/mobileSearch'
 import { StoreTopNavbar } from '@/components/store/shared/navbar'
@@ -23,6 +24,9 @@ function RouteComponent() {
       </div>
       {/* <CategoryList /> */}
       <Outlet />
+      <div className='text-center mt-10'>
+        <Footer></Footer>
+      </div>
     </div>
   )
 }
