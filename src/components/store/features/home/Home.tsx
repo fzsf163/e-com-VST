@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { GearIcon } from '@radix-ui/react-icons'
+import { ShoppingBag } from 'lucide-react'
 import { CarouselMain } from './carousel'
 
 export function Home() {
@@ -32,6 +33,32 @@ export function Home() {
             </Card>
           </div>
         ))}
+      </div>
+      <div className='mt-10'>
+        <div className='text-center space-y-2'>
+          <p className='font-semibold text-2xl'>FEATURED CATEGORIES</p>
+          <p className='font-normal text-xl'>
+            Get your desired product from featured category
+          </p>
+        </div>
+        <div className='mt-10 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10 max-w-screen-2xl mx-auto'>
+          {Array.from({ length: 16 }).map((_, index) => (
+            <div key={index}>
+              <Card>
+                <CardContent className='flex items-center justify-center flex-col gap-2 pt-10'>
+                  <p>
+                    <ShoppingBag className='size-20'></ShoppingBag>
+                  </p>
+                  <div className=''>
+                    <p className='font-normal text-lg'>
+                      Product Category {index + 1}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
