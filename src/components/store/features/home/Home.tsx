@@ -21,7 +21,7 @@ export function Home() {
         </div>
       </div>
       {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
-      <div className='mt-20 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 max-w-screen-2xl mx-auto px-10'>
+      <div className='mt-20 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 max-w-screen-2xl mx-auto'>
         {Array.from({ length: 4 }).map((_, index) => (
           <div className='p-1' key={index}>
             <Card>
