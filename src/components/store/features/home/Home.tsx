@@ -3,6 +3,7 @@ import { GearIcon } from '@radix-ui/react-icons'
 import { ShoppingBag } from 'lucide-react'
 import { ProductCarousel } from '../../shared/productCarousel'
 import { CarouselMain } from './carousel'
+import TabsGroupProduct from './productTabs'
 
 export function Home() {
   return (
@@ -73,6 +74,9 @@ export function Home() {
       {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
       <div className='mt-10'>
         <p className='font-semibold text-2xl text-center'>Featured Products</p>
+        <div className='mt-10 max-w-screen-2xl mx-auto'>
+          <TabsGroupProduct></TabsGroupProduct>
+        </div>
       </div>
     </div>
   )
