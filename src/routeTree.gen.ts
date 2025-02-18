@@ -16,6 +16,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as UserRouteImport } from './routes/user/route'
 import { Route as StoreRouteImport } from './routes/_store/route'
 import { Route as StoreIndexImport } from './routes/_store/index'
+import { Route as StoreOffersImport } from './routes/_store/offers'
 import { Route as StoreAboutImport } from './routes/_store/about'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
@@ -165,6 +166,12 @@ const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
   .lazy(() =>
     import('./routes/(auth)/forgot-password.lazy').then((d) => d.Route),
   )
+
+const StoreOffersRoute = StoreOffersImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => StoreRouteRoute,
+} as any)
 
 const StoreAboutRoute = StoreAboutImport.update({
   id: '/about',
@@ -417,6 +424,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StoreAboutImport
       parentRoute: typeof StoreRouteImport
     }
+    '/_store/offers': {
+      id: '/_store/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof StoreOffersImport
+      parentRoute: typeof StoreRouteImport
+    }
     '/(auth)/forgot-password': {
       id: '/(auth)/forgot-password'
       path: '/forgot-password'
@@ -599,11 +613,13 @@ declare module '@tanstack/react-router' {
 
 interface StoreRouteRouteChildren {
   StoreAboutRoute: typeof StoreAboutRoute
+  StoreOffersRoute: typeof StoreOffersRoute
   StoreIndexRoute: typeof StoreIndexRoute
 }
 
 const StoreRouteRouteChildren: StoreRouteRouteChildren = {
   StoreAboutRoute: StoreAboutRoute,
+  StoreOffersRoute: StoreOffersRoute,
   StoreIndexRoute: StoreIndexRoute,
 }
 
@@ -698,6 +714,7 @@ export interface FileRoutesByFullPath {
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
   '/about': typeof StoreAboutRoute
+  '/offers': typeof StoreOffersRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -730,6 +747,7 @@ export interface FileRoutesByTo {
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
   '/about': typeof StoreAboutRoute
+  '/offers': typeof StoreOffersRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -763,6 +781,7 @@ export interface FileRoutesById {
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/_store/about': typeof StoreAboutRoute
+  '/_store/offers': typeof StoreOffersRoute
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
   '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
   '/(auth)/sign-up': typeof authSignUpLazyRoute
@@ -799,6 +818,7 @@ export interface FileRouteTypes {
     | '/otp'
     | '/sign-in'
     | '/about'
+    | '/offers'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -830,6 +850,7 @@ export interface FileRouteTypes {
     | '/otp'
     | '/sign-in'
     | '/about'
+    | '/offers'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -861,6 +882,7 @@ export interface FileRouteTypes {
     | '/(auth)/otp'
     | '/(auth)/sign-in'
     | '/_store/about'
+    | '/_store/offers'
     | '/(auth)/forgot-password'
     | '/(auth)/sign-in-2'
     | '/(auth)/sign-up'
@@ -950,6 +972,7 @@ export const routeTree = rootRoute
       "filePath": "_store/route.tsx",
       "children": [
         "/_store/about",
+        "/_store/offers",
         "/_store/"
       ]
     },
@@ -987,6 +1010,10 @@ export const routeTree = rootRoute
     },
     "/_store/about": {
       "filePath": "_store/about.tsx",
+      "parent": "/_store"
+    },
+    "/_store/offers": {
+      "filePath": "_store/offers.tsx",
       "parent": "/_store"
     },
     "/(auth)/forgot-password": {
