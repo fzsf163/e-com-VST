@@ -22,11 +22,12 @@ import {
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
 
+const avatar = import.meta.env.VITE_AVATAR
 export const sidebarData: SidebarData = {
   user: {
     name: 'fancyfinger',
     email: 'fancyfinger@gmail.com',
-    avatar: '/avatars/shadcn.jpg',
+    avatar: avatar,
   },
   teams: [
     {

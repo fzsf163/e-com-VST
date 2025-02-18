@@ -13,8 +13,10 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UserRouteImport } from './routes/user/route'
 import { Route as StoreRouteImport } from './routes/_store/route'
 import { Route as StoreIndexImport } from './routes/_store/index'
+import { Route as StoreOffersImport } from './routes/_store/offers'
 import { Route as StoreAboutImport } from './routes/_store/about'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
@@ -24,7 +26,6 @@ import { Route as UserAuthenticatedIndexImport } from './routes/user/_authentica
 
 // Create Virtual Routes
 
-const UserImport = createFileRoute('/user')()
 const errors503LazyImport = createFileRoute('/(errors)/503')()
 const errors500LazyImport = createFileRoute('/(errors)/500')()
 const errors404LazyImport = createFileRoute('/(errors)/404')()
@@ -83,7 +84,7 @@ const UserAuthenticatedProductsSectionIndexLazyImport = createFileRoute(
 
 // Create/Update Routes
 
-const UserRoute = UserImport.update({
+const UserRouteRoute = UserRouteImport.update({
   id: '/user',
   path: '/user',
   getParentRoute: () => rootRoute,
@@ -166,6 +167,12 @@ const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
     import('./routes/(auth)/forgot-password.lazy').then((d) => d.Route),
   )
 
+const StoreOffersRoute = StoreOffersImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => StoreRouteRoute,
+} as any)
+
 const StoreAboutRoute = StoreAboutImport.update({
   id: '/about',
   path: '/about',
@@ -191,8 +198,8 @@ const auth500Route = auth500Import.update({
 } as any)
 
 const UserAuthenticatedRouteRoute = UserAuthenticatedRouteImport.update({
-  id: '/user/_authenticated',
-  getParentRoute: () => UserRoute,
+  id: '/_authenticated',
+  getParentRoute: () => UserRouteRoute,
 } as any)
 
 const UserAuthenticatedIndexRoute = UserAuthenticatedIndexImport.update({
@@ -379,15 +386,15 @@ declare module '@tanstack/react-router' {
       id: '/user'
       path: '/user'
       fullPath: '/user'
-      preLoaderRoute: typeof UserImport
+      preLoaderRoute: typeof UserRouteImport
       parentRoute: typeof rootRoute
     }
     '/user/_authenticated': {
       id: '/user/_authenticated'
-      path: '/user'
+      path: ''
       fullPath: '/user'
       preLoaderRoute: typeof UserAuthenticatedRouteImport
-      parentRoute: typeof UserRoute
+      parentRoute: typeof UserRouteImport
     }
     '/(auth)/500': {
       id: '/(auth)/500'
@@ -415,6 +422,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof StoreAboutImport
+      parentRoute: typeof StoreRouteImport
+    }
+    '/_store/offers': {
+      id: '/_store/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof StoreOffersImport
       parentRoute: typeof StoreRouteImport
     }
     '/(auth)/forgot-password': {
@@ -599,11 +613,13 @@ declare module '@tanstack/react-router' {
 
 interface StoreRouteRouteChildren {
   StoreAboutRoute: typeof StoreAboutRoute
+  StoreOffersRoute: typeof StoreOffersRoute
   StoreIndexRoute: typeof StoreIndexRoute
 }
 
 const StoreRouteRouteChildren: StoreRouteRouteChildren = {
   StoreAboutRoute: StoreAboutRoute,
+  StoreOffersRoute: StoreOffersRoute,
   StoreIndexRoute: StoreIndexRoute,
 }
 
@@ -679,15 +695,17 @@ const UserAuthenticatedRouteRouteWithChildren =
     UserAuthenticatedRouteRouteChildren,
   )
 
-interface UserRouteChildren {
+interface UserRouteRouteChildren {
   UserAuthenticatedRouteRoute: typeof UserAuthenticatedRouteRouteWithChildren
 }
 
-const UserRouteChildren: UserRouteChildren = {
+const UserRouteRouteChildren: UserRouteRouteChildren = {
   UserAuthenticatedRouteRoute: UserAuthenticatedRouteRouteWithChildren,
 }
 
-const UserRouteWithChildren = UserRoute._addFileChildren(UserRouteChildren)
+const UserRouteRouteWithChildren = UserRouteRoute._addFileChildren(
+  UserRouteRouteChildren,
+)
 
 export interface FileRoutesByFullPath {
   '': typeof StoreRouteRouteWithChildren
@@ -696,6 +714,7 @@ export interface FileRoutesByFullPath {
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
   '/about': typeof StoreAboutRoute
+  '/offers': typeof StoreOffersRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -728,6 +747,7 @@ export interface FileRoutesByTo {
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
   '/about': typeof StoreAboutRoute
+  '/offers': typeof StoreOffersRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -755,12 +775,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_store': typeof StoreRouteRouteWithChildren
-  '/user': typeof UserRouteWithChildren
+  '/user': typeof UserRouteRouteWithChildren
   '/user/_authenticated': typeof UserAuthenticatedRouteRouteWithChildren
   '/(auth)/500': typeof auth500Route
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/_store/about': typeof StoreAboutRoute
+  '/_store/offers': typeof StoreOffersRoute
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
   '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
   '/(auth)/sign-up': typeof authSignUpLazyRoute
@@ -797,6 +818,7 @@ export interface FileRouteTypes {
     | '/otp'
     | '/sign-in'
     | '/about'
+    | '/offers'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -828,6 +850,7 @@ export interface FileRouteTypes {
     | '/otp'
     | '/sign-in'
     | '/about'
+    | '/offers'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -859,6 +882,7 @@ export interface FileRouteTypes {
     | '/(auth)/otp'
     | '/(auth)/sign-in'
     | '/_store/about'
+    | '/_store/offers'
     | '/(auth)/forgot-password'
     | '/(auth)/sign-in-2'
     | '/(auth)/sign-up'
@@ -889,7 +913,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   StoreRouteRoute: typeof StoreRouteRouteWithChildren
-  UserRoute: typeof UserRouteWithChildren
+  UserRouteRoute: typeof UserRouteRouteWithChildren
   auth500Route: typeof auth500Route
   authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
@@ -905,7 +929,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   StoreRouteRoute: StoreRouteRouteWithChildren,
-  UserRoute: UserRouteWithChildren,
+  UserRouteRoute: UserRouteRouteWithChildren,
   auth500Route: auth500Route,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
@@ -948,11 +972,12 @@ export const routeTree = rootRoute
       "filePath": "_store/route.tsx",
       "children": [
         "/_store/about",
+        "/_store/offers",
         "/_store/"
       ]
     },
     "/user": {
-      "filePath": "user/_authenticated",
+      "filePath": "user/route.tsx",
       "children": [
         "/user/_authenticated"
       ]
@@ -985,6 +1010,10 @@ export const routeTree = rootRoute
     },
     "/_store/about": {
       "filePath": "_store/about.tsx",
+      "parent": "/_store"
+    },
+    "/_store/offers": {
+      "filePath": "_store/offers.tsx",
       "parent": "/_store"
     },
     "/(auth)/forgot-password": {
