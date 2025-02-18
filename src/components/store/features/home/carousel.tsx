@@ -1,11 +1,11 @@
 import { Card, CardContent } from '@/components/ui/card'
 import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-    type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import { useEffect, useState } from 'react'
@@ -29,7 +29,7 @@ export function CarouselMain() {
   }, [api])
 
   return (
-    <div className='w-full max-w-sm lg:max-w-screen-lg'>
+    <div className='w-full max-w-[70%] lg:max-w-screen-lg'>
       <Carousel
         opts={{
           align: 'start',
