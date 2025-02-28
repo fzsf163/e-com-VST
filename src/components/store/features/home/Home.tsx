@@ -91,7 +91,9 @@ export function Home() {
       {/* 🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️🗂️ */}
       <div className='mt-10'>
         <p className='font-semibold text-2xl text-center'>New Arrival</p>
-        <p className='font-normal text-base text-center mt-4 underline underline-offset-8 decoration-orange-300 decoration-[2px]'>Gadgets</p>
+        <p className='font-normal text-base text-center mt-4 underline underline-offset-8 decoration-orange-300 decoration-[2px]'>
+          Gadgets
+        </p>
         <div className='mt-10 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-10 max-w-screen-2xl mx-auto'>
           <div className='grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-10'>
             {Array.from({ length: 10 }).map((_, index) => (
