@@ -54,7 +54,7 @@ export function Home() {
                   <p>
                     <ShoppingBag className='size-20'></ShoppingBag>
                   </p>
-                  <div className=''>
+                  <div className='text-center'>
                     <p className='font-normal text-lg'>
                       Product Category {index + 1}
                     </p>
